@@ -14,24 +14,22 @@ function App() {
             <div className="black-nav">
                 <h4>블로그임</h4>
             </div>
-            <div className="list">
-                <h4 onClick={()=>{setModal(!modal)}}>{글제목[0]} <span onClick={()=>setCounter(counter+1)}><i class="bi bi-hand-thumbs-up-fill"></i></span>{counter}</h4>
-                <p>2월17일 발행</p>
-                {/* 남자 코트 에서 여자 코트 변경 버튼 */}
-                {/* <button onClick={()=>{
-                    let temp = [...글제목];
-                    temp[0] = '여자 코트 추천';
-                    셋글제목(temp);
-                }}>change</button> */}
-            </div>
-            <div className="list">
-                <h4 onClick={()=>{setModal(!modal)}}>{글제목[1]}</h4>
-                <p>2월17일 발행</p>
-            </div>
-            <div className="list">
-                <h4 onClick={()=>{setModal(!modal)}}>{글제목[2]}</h4>
-                <p>2월17일 발행</p>
-            </div>
+           {
+                글제목.map(function(a,i){
+                    return(<div className="list">
+                        <h4 onClick={()=>{setModal(!modal)}}>{글제목[i]} <span onClick={()=>setCounter(counter+1)}><i class="bi bi-hand-thumbs-up-fill"></i></span>{counter}</h4>
+                        <p>2월17일 발행</p>
+            {/* 남자 코트 에서 여자 코트 변경 버튼 */}
+            {/* <button onClick={()=>{
+                let temp = [...글제목];
+                temp[0] = '여자 코트 추천';
+                셋글제목(temp);
+            }}>change</button> */}
+                    </div>
+                    )
+                })
+
+            }    
     {/* 이름 순서 정렬 버튼 */}
     {/* <button onClick={()=>{
         var temp = [...글제목];
