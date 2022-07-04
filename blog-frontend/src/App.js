@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     let [글제목,셋글제목] = useState(['남자 코트 추천','여자 코트 추천','우동 맛집 추천']);
-    let [counter, setCounter] = useState(0);
+    let [likeit, setLikeit] = useState([0,0,0]);
     let [modal,setModal] = useState(false);
     return (
         <div className="App">
@@ -16,8 +16,14 @@ function App() {
             </div>
            {
                 글제목.map(function(a,i){
-                    return(<div className="list">
-                        <h4 onClick={()=>{setModal(!modal)}}>{글제목[i]} <span onClick={()=>setCounter(counter+1)}><i class="bi bi-hand-thumbs-up-fill"></i></span>{counter}</h4>
+                    return(<div className="list" key={i}>
+                        <h4 onClick={()=>{setModal(!modal)}}>{글제목[i]} 
+                        <span onClick={()=>
+                            {
+                                var temp = [...likeit];
+                                temp[i] = temp[i]+1;
+                                setLikeit(temp);
+                            }}><i class="bi bi-hand-thumbs-up-fill"></i></span>{likeit[i]}</h4>
                         <p>2월17일 발행</p>
             {/* 남자 코트 에서 여자 코트 변경 버튼 */}
             {/* <button onClick={()=>{
@@ -38,16 +44,16 @@ function App() {
 
     }}>change</button> */}
             {
-                modal == true ? <Modal /> : null
+                modal == true ? <Modal colors={'orange'} title={글제목} /> : null
             }
         </div>
     );
 }
 
-function Modal(){
+function Modal(props){
     return(
-        <div className = "modalComp">
-            <h4>제목</h4>
+        <div className = "modalComp" style={{background:props.colors}}>
+            <h4>{props.title[0]}</h4>
             <p>날짜</p>
             <p>상세내용</p>
         </div>
