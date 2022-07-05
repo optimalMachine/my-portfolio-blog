@@ -7,8 +7,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     let [글제목,셋글제목] = useState(['남자 코트 추천','여자 코트 추천','우동 맛집 추천']);
+    let [글쓰기,셋글쓰기] = useState('');
     let [likeit, setLikeit] = useState([0,0,0]);
     let [modal,setModal] = useState(false);
+    let [title,setTitle] = useState(0);
     return (
         <div className="App">
             <div className="black-nav">
@@ -17,7 +19,9 @@ function App() {
            {
                 글제목.map(function(a,i){
                     return(<div className="list" key={i}>
-                        <h4 onClick={()=>{setModal(!modal)}}>{글제목[i]} 
+                        <h4 onClick={()=>{
+                            setModal(!modal)
+                            setTitle(i)}}>{글제목[i]} 
                         <span onClick={()=>
                             {
                                 var temp = [...likeit];
@@ -25,6 +29,12 @@ function App() {
                                 setLikeit(temp);
                             }}><i class="bi bi-hand-thumbs-up-fill"></i></span>{likeit[i]}</h4>
                         <p>2월17일 발행</p>
+                        <button onClick={()=>{
+                            let copy = [...글제목];
+                            copy.splice(i,1);
+                            셋글제목(copy);
+
+                        }}>글삭제</button>
             {/* 남자 코트 에서 여자 코트 변경 버튼 */}
             {/* <button onClick={()=>{
                 let temp = [...글제목];
@@ -43,9 +53,22 @@ function App() {
         setCounter(temp);
 
     }}>change</button> */}
-            {
-                modal == true ? <Modal colors={'orange'} title={글제목} /> : null
-            }
+            <div className="user-enter">
+                <input onChange={(e)=>{
+                    셋글쓰기(e.target.value);
+                }}></input>
+                <button onClick={()=>{
+                    let copy = [...글제목];
+                    copy.unshift(글쓰기);
+                    셋글제목(copy);
+
+                }}>글발행</button>
+            </div>
+            <div className="modal-section">
+                {
+                    modal == true ? <Modal colors={'orange'} title={title} 글제목={글제목} /> : null
+                }
+            </div>
         </div>
     );
 }
@@ -53,7 +76,7 @@ function App() {
 function Modal(props){
     return(
         <div className = "modalComp" style={{background:props.colors}}>
-            <h4>{props.title[0]}</h4>
+            <h4>{props.글제목[props.title]}</h4>
             <p>날짜</p>
             <p>상세내용</p>
         </div>
