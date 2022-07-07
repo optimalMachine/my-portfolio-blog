@@ -2,21 +2,13 @@
   text-align: center;
 }
 
-.black-nav{
-  background: black;
-  width: 100%;
-  display: flex;
-  color:white;
-  padding: 20px;
+div {
+  box-sizing: border-box;
 }
 
-.user-enter {
-  padding-top:20px;
-}
-
-.list{
+.list {
   text-align: left;
-  padding-top:10px;
+  padding-top: 10px;
   padding-left: 20px;
   border-bottom: 1px solid grey;
 }
